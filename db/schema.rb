@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_074357) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_074623) do
+  create_table "attendance_setups", force: :cascade do |t|
+    t.boolean "roster"
+    t.integer "branch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_attendance_setups_on_branch_id"
+  end
+
   create_table "branches", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -26,5 +34,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_074357) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "attendance_setups", "branches"
   add_foreign_key "branches", "companies"
 end
