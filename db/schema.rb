@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_074623) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_074902) do
   create_table "attendance_setups", force: :cascade do |t|
     t.boolean "roster"
     t.integer "branch_id", null: false
@@ -34,6 +34,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_074623) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.date "hire_date"
+    t.string "employment_number"
+    t.integer "branch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_employees_on_branch_id"
+  end
+
   add_foreign_key "attendance_setups", "branches"
   add_foreign_key "branches", "companies"
+  add_foreign_key "employees", "branches"
 end
